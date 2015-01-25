@@ -14,6 +14,15 @@ public class Point {
 		this.theta = Math.atan2(y, x);
 	}
 	
+	@Override
+	public String toString() {
+		return new String(x + " " + y);
+	}
+	
+	public String toStringSyso() {
+		return new String("[X:" + x + ";" + "Y:" + y + "]");
+	}
+	
 //		@Override
 //		public boolean equals(Object point) {
 //			if ()

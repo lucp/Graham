@@ -12,6 +12,8 @@ import jdk.nashorn.internal.runtime.FindProperty;
 
 public class Graham {
 	
+	public static final double THETA = 0.00001;
+	
 	public static double det(Point p, Point q, Point r) {
 		return p.x * q.y + p.y * r.x + q.x * r.y - p.x * r.y - q.x * p.y - q.y * r.x;
 	}
@@ -47,7 +49,7 @@ public class Graham {
 			int pointIndexToComapre = pointIndex + 1;
 			while (pointIndexToComapre < points.size()) {
 				int pointIndexTmp = pointIndex;
-				if (Math.abs(points.get(pointIndexTmp).theta - points.get(pointIndexToComapre).theta) < 0.0000001) {
+				if (Math.abs(points.get(pointIndexTmp).theta - points.get(pointIndexToComapre).theta) < Graham.THETA) {
 					if (points.get(pointIndexTmp).r > points.get(pointIndexToComapre).r) {
 						points.remove(pointIndexToComapre);
 					}
@@ -62,7 +64,7 @@ public class Graham {
 		}
 	}
 	
-	public static LinkedList<Point> run(LinkedList<Point> points) {
+	public static Stack<Point> run(LinkedList<Point> points) {
 		Point referencePoint = Graham.findReferencePoint(points);
 		points.remove(referencePoint);
 		Graham.sort(points, referencePoint);
@@ -83,7 +85,7 @@ public class Graham {
 			}
 			stack.push(points.get(i));
 		}
-		return null;
+		return stack;
 	}
 	
 	public static LinkedList<Point> readPointsCSV(String filePath) throws IOException {
